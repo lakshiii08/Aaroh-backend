@@ -14,6 +14,7 @@ COPY Aaroh-backend/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend codebase and the nested Aaroh-AI core package.
+# This Dockerfile expects the build context to be the AAROH repo root.
 COPY Aaroh-backend/ /app/Aaroh-backend/
 COPY Aaroh-AI/Aaroh-AI/ /app/Aaroh-AI/
 

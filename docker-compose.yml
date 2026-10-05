@@ -82,7 +82,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - backend_uploads:/app/backend/data
+      - backend_uploads:/app/Aaroh-backend/data
     networks:
       - aaroh-net
 
