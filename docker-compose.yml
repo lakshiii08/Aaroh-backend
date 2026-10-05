@@ -46,8 +46,11 @@ services:
   # ── FastAPI Backend with Aaroh-AI Core Integration ───────────────────────
   backend:
     build:
-      context: ..
-      dockerfile: Aaroh-backend/Dockerfile
+      context: .
+      dockerfile: Dockerfile
+      args:
+        AAROH_AI_REPO_URL: ${AAROH_AI_REPO_URL:-https://github.com/Pahuja07/Aaroh-AI.git}
+        AAROH_AI_REF: ${AAROH_AI_REF:-main}
     container_name: aaroh-backend
     restart: always
     depends_on:

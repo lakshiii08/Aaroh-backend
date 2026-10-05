@@ -1,22 +1,31 @@
 FROM python:3.11-slim
 
+ARG AAROH_AI_REPO_URL=https://github.com/Pahuja07/Aaroh-AI.git
+ARG AAROH_AI_REF=main
+
 WORKDIR /app
 
-# Install system dependencies (build-essential, curl, libpq-dev)
+# Install system dependencies (build-essential, curl, git, libpq-dev)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
     curl \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy backend requirements first for better layer caching.
-COPY Aaroh-backend/requirements.txt /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend codebase and the nested Aaroh-AI core package.
-# This Dockerfile expects the build context to be the AAROH repo root.
-COPY Aaroh-backend/ /app/Aaroh-backend/
-COPY Aaroh-AI/Aaroh-AI/ /app/Aaroh-AI/
+# Copy backend codebase. Render builds this repo with Aaroh-backend as context.
+COPY . /app/Aaroh-backend/
+
+# Fetch Aaroh-AI at build time because Render's backend repo context cannot see
+# the sibling Aaroh-AI checkout from local development.
+RUN set -eux; \
+    git clone --depth 1 --branch "${AAROH_AI_REF}" "${AAROH_AI_REPO_URL}" /app/Aaroh-AI \
+    || (git clone "${AAROH_AI_REPO_URL}" /app/Aaroh-AI && cd /app/Aaroh-AI && git checkout "${AAROH_AI_REF}"); \
+    rm -rf /app/Aaroh-AI/.git
 
 WORKDIR /app/Aaroh-backend
 
