@@ -19,7 +19,7 @@ class LoginRequest(BaseModel):
 class StudentLoginRequest(BaseModel):
     roll_number: str = Field(..., description="Student Roll Number / Login ID")
     password: str = Field(..., description="Auto-generated Password or PIN")
-    school_code: Optional[str] = Field("DEMO01", description="School Code")
+    school_code: Optional[str] = Field(None, description="School Code")
 
 class TokenResponse(BaseModel):
     access_token: str

@@ -83,12 +83,11 @@ def download_assignment_pdf(
     assignment_id: str,
     pg_session: Session = Depends(get_db),
 ):
-    """Downloads printable assignment worksheet (HTML / PDF)."""
+    """Downloads the printable assignment worksheet and teacher answer key PDF."""
     service = AssignmentService(pg_session)
     file_path = service.get_assignment_pdf_path(assignment_id)
-    media_type = "text/html" if file_path.suffix == ".html" else "application/pdf"
     return FileResponse(
         path=file_path,
-        media_type=media_type,
-        filename=f"AAROH_Worksheet_{assignment_id}{file_path.suffix}",
+        media_type="application/pdf",
+        filename=f"AAROH_Worksheet_{assignment_id}.pdf",
     )

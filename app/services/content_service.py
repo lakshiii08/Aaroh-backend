@@ -21,9 +21,9 @@ class ContentService:
         """Saves uploaded curriculum file and runs Aaroh-AI document ingestion pipeline."""
         filename = file.filename
         ext = Path(filename).suffix.lower()
-        if ext not in [".pdf", ".txt", ".md"]:
+        if ext not in [".pdf", ".txt", ".md", ".pptx"]:
             raise ValidationError(
-                message=f"Unsupported file format '{ext}'. Allowed formats: .pdf, .txt, .md",
+                message=f"Unsupported file format '{ext}'. Allowed formats: .pdf, .pptx, .txt, .md",
                 code="UNSUPPORTED_FILE_TYPE",
             )
 

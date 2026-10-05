@@ -4,7 +4,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.repositories.user_repository import UserRepository
 from app.repositories.student_repository import StudentRepository
 from app.repositories.school_repository import SchoolRepository
-from app.models.mongo_models import UserDocument, StudentDocument, TeacherDocument, SessionDocument
+from app.models.mongo_models import UserDocument, StudentDocument, TeacherDocument, SchoolDocument, SessionDocument
 from app.core.security import hash_password, verify_password
 from app.core.jwt import create_access_token, create_refresh_token, decode_token, UserRole
 from app.core.exceptions import UnauthorizedError, DuplicateResourceError, NotFoundError, ForbiddenError
@@ -85,26 +85,11 @@ class AuthService:
         2. Student using Roll Number (Login ID) + School Code + Auto-generated password
         """
         login_id_clean = login_id.strip()
+        await self._provision_demo_login_if_requested(login_id_clean, password, school_code)
 
-        # Check if login_id looks like an email or demo identifier
+        # Check if login_id looks like an email or username identifier
         if "@" in login_id_clean:
             user = await self.user_repo.find_by_email(login_id_clean)
-
-            # Support demo teacher account on-the-fly (Req #13 & #32)
-            if not user and login_id_clean.lower() == "teacher@123" and password == "teacher@123":
-                demo_user = UserDocument(
-                    user_id="teacher_demo_123",
-                    email="teacher@123",
-                    hashed_password=hash_password("teacher@123"),
-                    role=UserRole.TEACHER,
-                    school_id="SCH_DEMO_01",
-                    district_id="DIST_DEMO_01",
-                    name="Demo Teacher",
-                    is_active=True,
-                    is_demo=True,
-                )
-                await self.user_repo.create_user(demo_user)
-                user = demo_user.model_dump()
 
             if not user:
                 raise UnauthorizedError(message="Invalid credentials", code="INVALID_CREDENTIALS")
@@ -159,35 +144,6 @@ class AuthService:
         student = await self.db["students"].find_one(query)
         user = None
 
-        if not student and roll_number in ("24", "024") and password == "1234":
-            # Auto-seed demo student for immediate evaluation and testing
-            resolved_school = school_id or "SCH_DEMO_01"
-            demo_user = UserDocument(
-                user_id="USR_DEMO_STUDENT_24",
-                email="student24@demo.aaroh.edu",
-                hashed_password=hash_password("1234"),
-                role=UserRole.STUDENT,
-                school_id=resolved_school,
-                district_id="DIST_DEMO_01",
-                name="Sona Murmu",
-                is_active=True,
-                is_demo=True,
-            )
-            await self.user_repo.create_user(demo_user)
-            demo_student = StudentDocument(
-                student_id="STU_DEMO_24",
-                user_id="USR_DEMO_STUDENT_24",
-                roll_number="24",
-                school_id=resolved_school,
-                district_id="DIST_DEMO_01",
-                grade_level=4,
-                section="A",
-                village="Dumka",
-            )
-            await self.student_repo.create_student(demo_student)
-            student = demo_student.model_dump()
-            user = demo_user.model_dump()
-
         if not student:
             raise UnauthorizedError(
                 message="Student account not found for this roll number and school context.",
@@ -200,10 +156,7 @@ class AuthService:
             raise UnauthorizedError(message="Student authentication credentials not found.", code="USER_NOT_FOUND")
 
         if not verify_password(password, user["hashed_password"]):
-            if roll_number in ("24", "024") and password == "1234":
-                pass
-            else:
-                raise UnauthorizedError(message="Invalid student roll number or password", code="INVALID_CREDENTIALS")
+            raise UnauthorizedError(message="Invalid student roll number or password", code="INVALID_CREDENTIALS")
 
         await self.user_repo.update_last_login(user["user_id"])
 
@@ -229,6 +182,160 @@ class AuthService:
             "roll_number": roll_number,
             "must_change_password": user.get("must_change_password", False),
         }
+
+    async def _provision_demo_login_if_requested(
+        self,
+        login_id: str,
+        password: str,
+        school_code: Optional[str],
+    ) -> None:
+        if not settings.ENABLE_DEMO_LOGINS:
+            return
+
+        is_demo_teacher = (
+            login_id.lower() == settings.DEMO_TEACHER_LOGIN.lower()
+            and password == settings.DEMO_TEACHER_PASSWORD
+        )
+        is_demo_student = (
+            login_id == settings.DEMO_STUDENT_ROLL_NUMBER
+            and password == settings.DEMO_STUDENT_PASSWORD
+            and (not school_code or school_code.upper().strip() in {
+                settings.DEMO_SCHOOL_CODE.upper(),
+                settings.DEMO_SCHOOL_ID.upper(),
+            })
+        )
+
+        if not is_demo_teacher and not is_demo_student:
+            return
+
+        await self._ensure_demo_school()
+        if is_demo_teacher:
+            await self._ensure_demo_teacher()
+        if is_demo_student:
+            await self._ensure_demo_student()
+
+    async def _ensure_demo_school(self) -> None:
+        existing = await self.school_repo.find_by_school_id(settings.DEMO_SCHOOL_ID)
+        if existing:
+            return
+
+        school = SchoolDocument(
+            school_id=settings.DEMO_SCHOOL_ID,
+            school_name="AAROH Demo Primary School",
+            school_code=settings.DEMO_SCHOOL_CODE,
+            district_id=settings.DEMO_DISTRICT_ID,
+            village="Demo Village",
+            state="Chhattisgarh",
+            total_students=1,
+        )
+        await self.school_repo.create_school(school)
+
+    async def _ensure_demo_teacher(self) -> None:
+        existing = await self.user_repo.find_by_email(settings.DEMO_TEACHER_LOGIN)
+        user_id = "demo_teacher_account"
+        if existing:
+            user_id = existing["user_id"]
+            await self.db["users"].update_one(
+                {"user_id": user_id},
+                {
+                    "$set": {
+                        "hashed_password": hash_password(settings.DEMO_TEACHER_PASSWORD),
+                        "role": UserRole.TEACHER,
+                        "school_id": settings.DEMO_SCHOOL_ID,
+                        "district_id": settings.DEMO_DISTRICT_ID,
+                        "name": existing.get("name") or "Demo Teacher",
+                        "is_active": True,
+                        "is_demo": True,
+                        "updated_at": datetime.now(timezone.utc),
+                    }
+                },
+            )
+        else:
+            user_doc = UserDocument(
+                user_id=user_id,
+                email=settings.DEMO_TEACHER_LOGIN,
+                hashed_password=hash_password(settings.DEMO_TEACHER_PASSWORD),
+                role=UserRole.TEACHER,
+                school_id=settings.DEMO_SCHOOL_ID,
+                district_id=settings.DEMO_DISTRICT_ID,
+                name="Demo Teacher",
+                is_active=True,
+                is_demo=True,
+            )
+            await self.user_repo.create_user(user_doc)
+
+        teacher_exists = await self.teachers_col.find_one({"user_id": user_id})
+        if not teacher_exists:
+            await self.teachers_col.insert_one(
+                TeacherDocument(
+                    teacher_id="demo_teacher_profile",
+                    user_id=user_id,
+                    school_id=settings.DEMO_SCHOOL_ID,
+                    district_id=settings.DEMO_DISTRICT_ID,
+                    employee_id="DEMO-TEACHER",
+                    assigned_grades=[3, 4, 5],
+                    subjects=["Environmental Studies", "Science", "Mathematics"],
+                ).model_dump()
+            )
+
+    async def _ensure_demo_student(self) -> None:
+        existing_student = await self.db["students"].find_one(
+            {
+                "school_id": settings.DEMO_SCHOOL_ID,
+                "roll_number": settings.DEMO_STUDENT_ROLL_NUMBER,
+            }
+        )
+        user_id = existing_student["user_id"] if existing_student else "demo_student_account"
+        existing_user = await self.user_repo.find_by_user_id(user_id)
+        if existing_user:
+            await self.db["users"].update_one(
+                {"user_id": user_id},
+                {
+                    "$set": {
+                        "hashed_password": hash_password(settings.DEMO_STUDENT_PASSWORD),
+                        "role": UserRole.STUDENT,
+                        "school_id": settings.DEMO_SCHOOL_ID,
+                        "district_id": settings.DEMO_DISTRICT_ID,
+                        "name": existing_user.get("name") or "Demo Student",
+                        "is_active": True,
+                        "is_demo": True,
+                        "must_change_password": False,
+                        "updated_at": datetime.now(timezone.utc),
+                    }
+                },
+            )
+        else:
+            await self.user_repo.create_user(
+                UserDocument(
+                    user_id=user_id,
+                    email=None,
+                    hashed_password=hash_password(settings.DEMO_STUDENT_PASSWORD),
+                    role=UserRole.STUDENT,
+                    school_id=settings.DEMO_SCHOOL_ID,
+                    district_id=settings.DEMO_DISTRICT_ID,
+                    name="Demo Student",
+                    is_active=True,
+                    is_demo=True,
+                    must_change_password=False,
+                )
+            )
+
+        if existing_student:
+            return
+
+        await self.db["students"].insert_one(
+            StudentDocument(
+                student_id="demo_student_profile",
+                user_id=user_id,
+                roll_number=settings.DEMO_STUDENT_ROLL_NUMBER,
+                school_id=settings.DEMO_SCHOOL_ID,
+                district_id=settings.DEMO_DISTRICT_ID,
+                grade_level=4,
+                section="A",
+                village="Demo Village",
+                created_by_teacher_id="demo_teacher_account",
+            ).model_dump()
+        )
 
     async def refresh_access_token(self, refresh_token: str) -> Dict[str, Any]:
         """Refreshes an access token using a valid refresh token."""

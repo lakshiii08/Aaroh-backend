@@ -1,21 +1,25 @@
+import re
+import textwrap
 import uuid
-from pathlib import Path
-from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import pymupdf
 from sqlalchemy.orm import Session
 
-from app.models.pg_models import (
-     AssignmentModel,
-     AssignmentSubmissionModel,
-     DocumentModel,
-     ConceptModel,
-     ContentChunkModel,
-)
-from app.ai.aaroh_ai_adapter import ai_adapter
-from app.ai.translation_ai import translation_ai
 from app.ai.simplification_ai import simplification_ai
-from app.core.exceptions import NotFoundError, ValidationError, AIProcessingError
+from app.ai.translation_ai import translation_ai
+from app.core.exceptions import AIProcessingError, NotFoundError, ValidationError
 from app.core.logging import logger
+from app.models.pg_models import (
+    AssignmentModel,
+    AssignmentSubmissionModel,
+    ConceptModel,
+    ContentChunkModel,
+    DocumentModel,
+)
+
 
 class AssignmentService:
     def __init__(self, pg_session: Session):
@@ -33,24 +37,31 @@ class AssignmentService:
         difficulty: str = "medium",
         title: Optional[str] = None,
     ) -> Dict[str, Any]:
-        """Generates a real, curriculum-anchored worksheet assignment from uploaded material / concepts."""
+        """Generate a source-grounded worksheet and answer-key PDF."""
         resolved_concept_code = concept_code
         doc_title = None
 
         if document_id:
             doc = self.pg_session.query(DocumentModel).filter_by(id=document_id).first()
-            if doc:
-                doc_title = doc.title
-                if not resolved_concept_code:
-                    first_concept = self.pg_session.query(ConceptModel).filter_by(document_id=document_id).first()
-                    if first_concept:
-                        resolved_concept_code = first_concept.concept_code
+            if not doc:
+                raise NotFoundError(message=f"Document '{document_id}' not found.", code="DOCUMENT_NOT_FOUND")
+            doc_title = doc.title or doc.filename
+            if not resolved_concept_code:
+                first_concept = (
+                    self.pg_session.query(ConceptModel)
+                    .filter_by(document_id=document_id)
+                    .order_by(ConceptModel.created_at.asc())
+                    .first()
+                )
+                if first_concept:
+                    resolved_concept_code = first_concept.concept_code
 
         if not resolved_concept_code:
-            # Fallback to standard curriculum concept if not specified
-            resolved_concept_code = "EVS-G3-WAT-01"
+            raise ValidationError(
+                message="Provide a document_id with extracted concepts or a concept_code before generating an assignment.",
+                code="ASSIGNMENT_SOURCE_REQUIRED",
+            )
 
-        # 1. Retrieve localized lesson & concept understanding from Aaroh-AI
         try:
             localized_lesson = simplification_ai.localize_concept(
                 concept_code=resolved_concept_code,
@@ -62,126 +73,102 @@ class AssignmentService:
             logger.error(f"Aaroh-AI localization failed for assignment generation: {e}")
             raise AIProcessingError(message=f"Failed to extract concept understanding from Aaroh-AI: {str(e)}")
 
-        # 2. Formulate assignment title
-        concept_name = localized_lesson.concept_name or "Primary Science & Environment"
-        assignment_title = title or f"{concept_name} — Practice Worksheet & Concept Review (Class {grade})"
+        concept_name = localized_lesson.concept_name or "Primary Lesson Concept"
+        assignment_title = title or f"{concept_name} - Practice Worksheet & Answer Key (Class {grade})"
         assignment_id = f"asgn_{uuid.uuid4().hex[:12]}"
-
-        # 3. Formulate structured questions anchored on the actual localized content
-        items: List[Dict[str, Any]] = []
         count = max(1, min(number_of_questions, 15))
 
-        base_prompts = [
-            f"Explain how {concept_name} affects our daily life and village water or forest resources.",
-            f"Based on our lesson on {concept_name}, describe the role played by nature and community conservation.",
-            f"What happens during {concept_name} in seasonal changes (monsoon vs summer)? Give a real example.",
-            f"Why is it essential to protect trees, water sources, and soil in our local panchayat area?",
-            f"Draw or describe a step-by-step process showing {concept_name} using pebbles or village sketches.",
-        ]
+        source_refs = self._get_document_source_chunks(document_id, resolved_concept_code)
+        if document_id and not source_refs:
+            raise ValidationError(
+                message=f"No readable content chunks found for document '{document_id}'. Re-upload or re-ingest the file.",
+                code="DOCUMENT_HAS_NO_CHUNKS",
+            )
 
-        # Use localized story, reflection questions, and local analogies from Aaroh-AI
-        local_analogies = getattr(localized_lesson, "local_analogies", [])
-        reflection_qs = getattr(localized_lesson, "reflection_questions", [])
+        local_analogies = getattr(localized_lesson, "local_analogies", []) or []
+        reflection_qs = getattr(localized_lesson, "reflection_questions", []) or []
+        explanation = (
+            getattr(localized_lesson, "simplified_explanation", "")
+            or getattr(localized_lesson, "localized_story", "")
+            or concept_name
+        )
+        primary_analogy = local_analogies[0] if local_analogies else "Local classroom observation"
 
-        primary_analogy = local_analogies[0] if local_analogies else "Village ecosystem observation"
-
+        items: List[Dict[str, Any]] = []
         for i in range(count):
             q_num = i + 1
-            if i < len(reflection_qs) and isinstance(reflection_qs[i], dict):
-                rq = reflection_qs[i]
-                raw_q = rq.get("question", base_prompts[i % len(base_prompts)])
-                tr_text = rq.get("translated_question") or rq.get("question", raw_q)
+            source_ref = source_refs[i % len(source_refs)] if source_refs else {}
+            source_excerpt = self._source_excerpt(source_ref.get("content") or explanation)
+            if source_excerpt:
+                raw_q = self._question_from_source(source_excerpt, concept_name, i)
+            elif i < len(reflection_qs) and isinstance(reflection_qs[i], dict):
+                raw_q = reflection_qs[i].get("question") or f"Explain {concept_name} in your own words."
             else:
-                raw_q = base_prompts[i % len(base_prompts)]
-                # Translate question into target language via real Aaroh-AI
-                tr_result = translation_ai.translate_single(
-                    text=raw_q,
-                    source_lang="en",
-                    target_lang=target_language,
-                    target_dialect=target_dialect,
-                )
-                tr_text = tr_result.translated_text
+                raw_q = f"Explain {concept_name} in your own words and give one local example."
 
-            # Ol Chiki script handling if Santali
-            ol_chiki = None
+            tr_result = translation_ai.translate_single(
+                text=raw_q,
+                source_lang="en",
+                target_lang=target_language,
+                target_dialect=target_dialect,
+            )
+            translated_question = tr_result.translated_text
+
+            translated_ol_chiki = None
             if target_language in ["sat", "santali"]:
-                ol_chiki = "ᱫᱟᱨᱮ ᱟᱨ ᱫᱟᱜ ᱨᱮᱭᱟᱜ ᱡᱚᱢ ᱵᱮᱱᱟᱣ ᱠᱟᱛᱮ ᱵᱟᱲᱟᱭ ᱢᱮ"
+                translated_ol_chiki = "Ol Chiki transliteration will appear when the configured model returns it."
 
-            item_data = {
-                "id": f"q_{assignment_id}_{q_num}",
-                "question_number": q_num,
-                "question": raw_q,
-                "translated_question": tr_text,
-                "translated_ol_chiki": ol_chiki,
-                "concept": concept_name,
-                "local_example": primary_analogy,
-                "writing_space_lines": 4,
-                "marks": 4 if difficulty == "medium" else (5 if difficulty == "hard" else 3),
-                "suggested_answer": f"Core reasoning linked to {concept_name} with local village observation.",
-            }
-            items.append(item_data)
+            localized_context = (
+                f"Source excerpt: {source_excerpt}"
+                if source_excerpt
+                else f"Localized context: {primary_analogy}"
+            )
+            answer_key = (
+                f"A strong answer should explain this source idea: {source_excerpt}"
+                if source_excerpt
+                else f"A strong answer should connect {concept_name} to a clear local example."
+            )
+
+            items.append(
+                {
+                    "id": f"q_{assignment_id}_{q_num}",
+                    "question_number": q_num,
+                    "item_type": "short_answer",
+                    "prompt": raw_q,
+                    "question": raw_q,
+                    "translated_question": translated_question,
+                    "translated_ol_chiki": translated_ol_chiki,
+                    "concept_code": resolved_concept_code,
+                    "concept": concept_name,
+                    "local_example": primary_analogy,
+                    "localized_context": localized_context,
+                    "source_document_id": document_id,
+                    "source_document_title": doc_title,
+                    "source_excerpt": source_excerpt,
+                    "source_page": source_ref.get("page_number"),
+                    "source_chunk_index": source_ref.get("chunk_index"),
+                    "writing_space_lines": 4,
+                    "marks": 4 if difficulty == "medium" else (5 if difficulty == "hard" else 3),
+                    "correct_answer": answer_key,
+                    "suggested_answer": answer_key,
+                }
+            )
 
         total_marks = sum(it["marks"] for it in items)
-
-        # 4. Generate printable HTML / PDF worksheet package
         packages_dir = Path("data/packages/worksheets")
         packages_dir.mkdir(parents=True, exist_ok=True)
-        pdf_file_path = packages_dir / f"{assignment_id}.html"
+        pdf_file_path = packages_dir / f"{assignment_id}.pdf"
+        self._write_assignment_pdf(
+            pdf_file_path,
+            assignment_title=assignment_title,
+            subject=subject,
+            grade=grade,
+            difficulty=difficulty,
+            total_marks=total_marks,
+            items=items,
+            doc_title=doc_title,
+        )
 
-        html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>{assignment_title}</title>
-<style>
-  body {{ font-family: 'Segoe UI', system-ui, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; color: #1e293b; }}
-  .header {{ border-bottom: 2px solid #059669; padding-bottom: 12px; margin-bottom: 20px; }}
-  .title {{ font-size: 22px; font-weight: bold; color: #065f46; margin: 0 0 6px 0; }}
-  .meta {{ font-size: 13px; color: #64748b; display: flex; justify-content: space-between; }}
-  .student-box {{ border: 1px dashed #cbd5e1; padding: 10px; border-radius: 6px; margin: 16px 0 24px 0; font-size: 13px; }}
-  .item {{ margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9; }}
-  .q-text {{ font-size: 15px; font-weight: 600; margin-bottom: 4px; }}
-  .q-tr {{ font-size: 14px; color: #047857; margin-bottom: 8px; font-style: italic; }}
-  .lines {{ height: 60px; border-bottom: 1px dotted #94a3b8; margin-top: 10px; }}
-  .footer {{ font-size: 11px; color: #94a3b8; text-align: center; margin-top: 40px; }}
-</style>
-</head>
-<body>
-<div class="header">
-  <div class="title">{assignment_title}</div>
-  <div class="meta">
-    <span><strong>Subject:</strong> {subject} (Class {grade})</span>
-    <span><strong>Difficulty:</strong> {difficulty.capitalize()}</span>
-    <span><strong>Total Marks:</strong> {total_marks}</span>
-  </div>
-</div>
-<div class="student-box">
-  Student Name: _______________________ &nbsp;&nbsp;&nbsp;&nbsp; Roll No: _______ &nbsp;&nbsp;&nbsp;&nbsp; Date: ___________
-</div>
-<div class="content">
-"""
-        for it in items:
-            html_content += f"""
-  <div class="item">
-    <div class="q-text">Q{it['question_number']}. {it['question']} ({it['marks']} Marks)</div>
-    <div class="q-tr">Mother-Tongue: {it['translated_question']}</div>
-    {"<div class='q-tr' style='font-weight:bold;'>Ol Chiki: " + it['translated_ol_chiki'] + "</div>" if it['translated_ol_chiki'] else ""}
-    <div style="font-size:12px; color:#64748b;">Hint / Local Example: {it['local_example']}</div>
-    <div class="lines"></div>
-  </div>
-"""
-        html_content += f"""
-</div>
-<div class="footer">
-  AAROH — AI-Powered Mother-Tongue Learning Platform · Primary Rural & Tribal Education Bridge
-</div>
-</body>
-</html>
-"""
-        with open(pdf_file_path, "w", encoding="utf-8") as f:
-            f.write(html_content)
-
-        # 5. Save model in PostgreSQL
         model = AssignmentModel(
             id=assignment_id,
             title=assignment_title,
@@ -201,7 +188,11 @@ class AssignmentService:
         self.pg_session.add(model)
         self.pg_session.commit()
 
-        logger.info(f"Generated real assignment '{assignment_id}' with {len(items)} questions based on Aaroh-AI.")
+        logger.info(
+            "Generated assignment '%s' with %s source-grounded questions and a PDF answer key.",
+            assignment_id,
+            len(items),
+        )
 
         return {
             "id": assignment_id,
@@ -224,7 +215,7 @@ class AssignmentService:
             query = query.filter_by(subject=subject)
         if grade:
             query = query.filter_by(grade=grade)
-        
+
         records = query.order_by(AssignmentModel.created_at.desc()).all()
         return [
             {
@@ -279,7 +270,6 @@ class AssignmentService:
         total_q = len(items)
         answered_q = len([a for a in answers.values() if a and a.strip()])
 
-        # Real pedagogical scoring
         score_pct = round((answered_q / max(1, total_q)) * 85.0, 1)
         if answered_q == total_q:
             score_pct = 90.0
@@ -325,3 +315,162 @@ class AssignmentService:
         if not path.exists():
             raise NotFoundError(message=f"File on disk '{path}' not found.", code="FILE_NOT_FOUND")
         return path
+
+    def _get_document_source_chunks(
+        self,
+        document_id: Optional[str],
+        concept_code: Optional[str],
+        limit: int = 15,
+    ) -> List[Dict[str, Any]]:
+        if not document_id:
+            return []
+
+        base_query = self.pg_session.query(ContentChunkModel).filter(ContentChunkModel.document_id == document_id)
+        chunks = []
+        if concept_code:
+            chunks = (
+                base_query.filter(ContentChunkModel.concept_code == concept_code)
+                .order_by(ContentChunkModel.page_number.asc(), ContentChunkModel.chunk_index.asc())
+                .limit(limit)
+                .all()
+            )
+        if not chunks:
+            chunks = (
+                base_query.order_by(ContentChunkModel.page_number.asc(), ContentChunkModel.chunk_index.asc())
+                .limit(limit)
+                .all()
+            )
+
+        return [
+            {
+                "content": c.content,
+                "page_number": c.page_number,
+                "chunk_index": c.chunk_index,
+                "concept_code": c.concept_code,
+            }
+            for c in chunks
+            if c.content and c.content.strip()
+        ]
+
+    @staticmethod
+    def _source_excerpt(text: str, max_chars: int = 260) -> str:
+        clean = re.sub(r"\s+", " ", text or "").strip()
+        if not clean:
+            return ""
+        sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", clean) if len(s.strip()) >= 35]
+        excerpt = sentences[0] if sentences else clean
+        return excerpt[: max_chars - 3].rstrip() + "..." if len(excerpt) > max_chars else excerpt
+
+    @staticmethod
+    def _question_from_source(source_excerpt: str, concept_name: str, index: int) -> str:
+        templates = [
+            'From the uploaded lesson, explain this idea in your own words: "{excerpt}"',
+            'Using the uploaded lesson, why is this important for {concept}: "{excerpt}"',
+            'Read the lesson excerpt and give one local example connected to it: "{excerpt}"',
+            'What should a student remember from this part of the uploaded lesson: "{excerpt}"',
+        ]
+        return templates[index % len(templates)].format(excerpt=source_excerpt, concept=concept_name)
+
+    def _write_assignment_pdf(
+        self,
+        output_path: Path,
+        *,
+        assignment_title: str,
+        subject: str,
+        grade: int,
+        difficulty: str,
+        total_marks: int,
+        items: List[Dict[str, Any]],
+        doc_title: Optional[str],
+    ) -> None:
+        doc = pymupdf.open()
+        page_width, page_height = 595, 842
+        margin = 54
+        y = margin
+        page = doc.new_page(width=page_width, height=page_height)
+
+        def new_page() -> None:
+            nonlocal page, y
+            page = doc.new_page(width=page_width, height=page_height)
+            y = margin
+
+        def add_text(text: str, size: int = 10, gap: int = 4, color=(0, 0, 0), width_chars: int = 92) -> None:
+            nonlocal y
+            for line in self._wrap_pdf_text(text, width_chars=width_chars):
+                if y > page_height - margin:
+                    new_page()
+                page.insert_text((margin, y), line, fontsize=size, fontname="helv", color=color)
+                y += size + gap
+
+        def add_rule(space: int = 12) -> None:
+            nonlocal y
+            if y > page_height - margin:
+                new_page()
+            page.draw_line((margin, y), (page_width - margin, y), color=(0.72, 0.76, 0.80), width=0.6)
+            y += space
+
+        def add_answer_lines(count: int = 4) -> None:
+            nonlocal y
+            for _ in range(count):
+                if y > page_height - margin:
+                    new_page()
+                page.draw_line((margin, y), (page_width - margin, y), color=(0.70, 0.74, 0.78), width=0.5)
+                y += 18
+
+        add_text("AAROH Worksheet", size=18, gap=8, color=(0.02, 0.37, 0.25), width_chars=60)
+        add_text(assignment_title, size=13, gap=5, color=(0.06, 0.09, 0.16), width_chars=70)
+        add_text(
+            f"Subject: {subject} | Class: {grade} | Difficulty: {difficulty.capitalize()} | Total Marks: {total_marks}",
+            size=10,
+            color=(0.25, 0.31, 0.39),
+        )
+        if doc_title:
+            add_text(f"Source document: {doc_title}", size=9, color=(0.25, 0.31, 0.39))
+        add_rule()
+        add_text("Student Name: ____________________    Roll No: ________    Date: __________", size=10)
+        add_rule()
+
+        for item in items:
+            add_text(f"Q{item['question_number']}. {item['question']} ({item['marks']} marks)", size=11, gap=5)
+            if item.get("translated_question"):
+                add_text(f"Mother-tongue: {item['translated_question']}", size=9, color=(0.02, 0.45, 0.30))
+            if item.get("source_excerpt"):
+                add_text(f"Source: {item['source_excerpt']}", size=8, color=(0.39, 0.45, 0.55))
+            if item.get("local_example"):
+                add_text(f"Hint / local example: {item['local_example']}", size=8, color=(0.39, 0.45, 0.55))
+            add_answer_lines(item.get("writing_space_lines", 4))
+            add_rule(space=16)
+
+        new_page()
+        add_text("Teacher Answer Key", size=16, gap=8, color=(0.02, 0.37, 0.25), width_chars=70)
+        add_text("Use this section for checking student answers. Keep it with the teacher copy.", size=10)
+        add_rule()
+
+        for item in items:
+            add_text(f"Q{item['question_number']}. {item['question']}", size=10, gap=4)
+            add_text(f"Expected answer: {item.get('correct_answer') or item.get('suggested_answer') or ''}", size=9)
+            if item.get("source_page") is not None:
+                add_text(
+                    f"Source location: page/slide {item.get('source_page')}, chunk {item.get('source_chunk_index')}",
+                    size=8,
+                    color=(0.39, 0.45, 0.55),
+                )
+            add_rule(space=14)
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        if output_path.exists():
+            output_path.unlink()
+        doc.save(str(output_path))
+        doc.close()
+
+    @staticmethod
+    def _wrap_pdf_text(text: str, width_chars: int = 92) -> List[str]:
+        normalized = re.sub(r"\s+", " ", str(text or "")).strip()
+        if not normalized:
+            return [""]
+        return textwrap.wrap(
+            normalized,
+            width=max(30, width_chars),
+            break_long_words=False,
+            replace_whitespace=False,
+        ) or [normalized]

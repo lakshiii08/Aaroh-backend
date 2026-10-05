@@ -90,6 +90,27 @@ def test_teacher_signup_and_login_flow():
     assert bad_data["success"] is False
     assert bad_data["error"]["code"] == "INVALID_CREDENTIALS"
 
+def test_configured_demo_logins():
+    """Demo accounts are provisioned on first login and authenticated normally."""
+    teacher_resp = client.post("/api/v1/auth/login", json={
+        "login_id": "teacher@123",
+        "password": "teacher@123",
+    })
+    assert teacher_resp.status_code == 200
+    teacher_data = teacher_resp.json()["data"]
+    assert teacher_data["role"] == "TEACHER"
+    assert teacher_data["school_id"] == "SCH_DEMO_01"
+
+    student_resp = client.post("/api/v1/auth/student-login", json={
+        "school_code": "DEMO01",
+        "roll_number": "24",
+        "password": "1234",
+    })
+    assert student_resp.status_code == 200
+    student_data = student_resp.json()["data"]
+    assert student_data["role"] == "STUDENT"
+    assert student_data["roll_number"] == "24"
+
 def test_root_and_health_endpoints():
     """Verifies system status and health check."""
     root_resp = client.get("/")

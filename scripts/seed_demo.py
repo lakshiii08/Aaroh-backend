@@ -1,6 +1,7 @@
 import os
 import sys
 import asyncio
+import secrets
 from pathlib import Path
 
 # Add backend directory to sys.path
@@ -16,7 +17,7 @@ from app.core.jwt import UserRole
 from app.core.logging import logger
 
 async def seed_demo_teacher():
-    """Seeds ONLY the development demo teacher account (teacher@123 / teacher@123).
+    """Seeds ONLY an explicitly configured development demo teacher account.
     
     Creates NO fake students, NO fake quizzes, NO fake analytics, NO fake assignments.
     """
@@ -28,25 +29,26 @@ async def seed_demo_teacher():
     teachers_col = db["teachers"]
     schools_col = db["schools"]
 
-    # 1. Ensure school exists for the demo teacher
-    demo_school_id = "SCH_DEMO_01"
+    demo_school_id = os.getenv("AAROH_DEMO_SCHOOL_ID", "SCH_LOCAL_DEMO")
+    demo_school_code = os.getenv("AAROH_DEMO_SCHOOL_CODE", "LOCAL-DEMO")
+    demo_district_id = os.getenv("AAROH_DEMO_DISTRICT_ID", "DIST_LOCAL_DEMO")
+    demo_identifier = os.getenv("AAROH_DEMO_TEACHER_EMAIL", "demo.teacher.local@aaroh.local")
+    demo_password = os.getenv("AAROH_DEMO_TEACHER_PASSWORD") or secrets.token_urlsafe(12)
+
+    # 1. Ensure school exists for the configured demo teacher
     existing_school = await schools_col.find_one({"school_id": demo_school_id})
     if not existing_school:
         school = SchoolDocument(
             school_id=demo_school_id,
-            school_code="DEMO01",
-            school_name="Government Primary Ashram School (Demo)",
-            district_id="DIST_DEMO_01",
-            village="Demo Village",
+            school_code=demo_school_code,
+            school_name=os.getenv("AAROH_DEMO_SCHOOL_NAME", "Local Demo School"),
+            district_id=demo_district_id,
+            village=os.getenv("AAROH_DEMO_VILLAGE", "Local Demo Village"),
             state="Chhattisgarh",
             total_students=0,
         )
         await schools_col.insert_one(school.model_dump())
         logger.info(f"Created demo school context: {school.school_name} (Code: {school.school_code})")
-
-    # 2. Seed ONLY the demo teacher account: teacher@123 / teacher@123
-    demo_identifier = "teacher@123"
-    demo_password = "teacher@123"
 
     existing_user = await users_col.find_one({"email": demo_identifier})
     if existing_user:
@@ -58,8 +60,8 @@ async def seed_demo_teacher():
                 "is_active": True,
                 "role": UserRole.TEACHER,
                 "school_id": demo_school_id,
-                "district_id": "DIST_DEMO_01",
-                "name": "Demo Teacher",
+                "district_id": demo_district_id,
+                "name": os.getenv("AAROH_DEMO_TEACHER_NAME", "Local Demo Teacher"),
                 "is_demo": True,
             }}
         )
@@ -71,8 +73,8 @@ async def seed_demo_teacher():
             hashed_password=hash_password(demo_password),
             role=UserRole.TEACHER,
             school_id=demo_school_id,
-            district_id="DIST_DEMO_01",
-            name="Demo Teacher",
+            district_id=demo_district_id,
+            name=os.getenv("AAROH_DEMO_TEACHER_NAME", "Local Demo Teacher"),
             is_active=True,
             is_demo=True,
         )
@@ -82,7 +84,7 @@ async def seed_demo_teacher():
             teacher_id="tprof_demo_123",
             user_id=user_id,
             school_id=demo_school_id,
-            district_id="DIST_DEMO_01",
+            district_id=demo_district_id,
             employee_id="DEMO_TCH_01",
             assigned_grades=[1, 2, 3, 4, 5],
             subjects=["Science", "Mathematics", "Environmental Studies", "Language"],

@@ -43,7 +43,12 @@ class PostgresDatabaseManager:
                 logger.info(f"Connected successfully to PostgreSQL database: {url.split('@')[-1]}")
                 return engine
             except Exception as e:
+                if not settings.USE_SQLITE_FALLBACK:
+                    logger.error("PostgreSQL connection failed and SQLite fallback is disabled.")
+                    raise
                 logger.warning(f"PostgreSQL connection failed ({e}). Falling back to SQLite database.")
+        elif not settings.USE_SQLITE_FALLBACK:
+            raise RuntimeError("DATABASE_URL or complete PostgreSQL settings are required when SQLite fallback is disabled.")
 
         # SQLite Fallback for local development and test isolation
         db_path = Path(settings.SQLITE_DB_PATH)

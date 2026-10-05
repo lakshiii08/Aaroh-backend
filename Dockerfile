@@ -9,17 +9,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy backend requirements
-COPY backend/requirements.txt /app/requirements.txt
+# Copy backend requirements first for better layer caching.
+COPY Aaroh-backend/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy backend codebase
-COPY backend/ /app/backend/
-COPY Aaroh-AI/ /app/Aaroh-AI/
+# Copy backend codebase and the nested Aaroh-AI core package.
+COPY Aaroh-backend/ /app/Aaroh-backend/
+COPY Aaroh-AI/Aaroh-AI/ /app/Aaroh-AI/
 
-WORKDIR /app/backend
+WORKDIR /app/Aaroh-backend
 
-ENV PYTHONPATH=/app/backend:/app/Aaroh-AI:/app/Aaroh-AI/src
+ENV PYTHONPATH=/app/Aaroh-backend:/app/Aaroh-AI:/app/Aaroh-AI/src
 ENV AAROH_AI_PATH=/app/Aaroh-AI
 
 EXPOSE 8000

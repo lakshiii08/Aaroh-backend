@@ -15,13 +15,23 @@ class AssignmentGenerateRequest(BaseModel):
 class AssignmentItemSchema(BaseModel):
     id: str
     question_number: int
+    item_type: Optional[str] = None
+    prompt: Optional[str] = None
     question: str
     translated_question: Optional[str] = None
     translated_ol_chiki: Optional[str] = None
+    concept_code: Optional[str] = None
     concept: str
     local_example: Optional[str] = None
+    localized_context: Optional[str] = None
+    source_document_id: Optional[str] = None
+    source_document_title: Optional[str] = None
+    source_excerpt: Optional[str] = None
+    source_page: Optional[int] = None
+    source_chunk_index: Optional[int] = None
     writing_space_lines: int = 4
     marks: int = 4
+    correct_answer: Optional[str] = None
     suggested_answer: Optional[str] = None
 
 class AssignmentResponse(BaseModel):

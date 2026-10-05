@@ -1,4 +1,5 @@
 import asyncio
+import re
 from typing import Optional
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from app.core.config import settings
@@ -16,7 +17,8 @@ class MongoManager:
             return cls.db
 
         try:
-            logger.info(f"Connecting to MongoDB at {settings.MONGODB_URI}...")
+            safe_uri = re.sub(r"://[^@/]+@", "://***:***@", settings.MONGODB_URI)
+            logger.info(f"Connecting to MongoDB at {safe_uri}...")
             real_client = AsyncIOMotorClient(
                 settings.MONGODB_URI,
                 serverSelectionTimeoutMS=2000,
