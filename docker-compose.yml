@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # ── MongoDB: Authentication & Identity Database ───────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: aaroh-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: aaroh_auth_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - aaroh-net
+
+  # ── PostgreSQL: Curriculum, Learning, Assessment & pgvector Store ─────────
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aaroh-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: aaroh_admin
+      POSTGRES_PASSWORD: aaroh_secure_pass_2026
+      POSTGRES_DB: aaroh_learning_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - aaroh-net
+
+  # ── Redis: Cache & Async Worker Queue ─────────────────────────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: aaroh-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - aaroh-net
+
+  # ── FastAPI Backend with Aaroh-AI Core Integration ───────────────────────
+  backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    container_name: aaroh-backend
+    restart: always
+    depends_on:
+      - mongodb
+      - postgres
+      - redis
+    environment:
+      - APP_ENV=production
+      - DEBUG=false
+      - HOST=0.0.0.0
+      - PORT=8000
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DATABASE=aaroh_auth_db
+      - MONGODB_USE_MOCK_FALLBACK=false
+      - DATABASE_URL=postgresql://aaroh_admin:aaroh_secure_pass_2026@postgres:5432/aaroh_learning_db
+      - USE_SQLITE_FALLBACK=false
+      - REDIS_URL=redis://redis:6379/0
+      - JWT_SECRET_KEY=aaroh_production_super_secret_jwt_key_2026!
+      - AAROH_AI_PATH=/app/Aaroh-AI
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_uploads:/app/backend/data
+    networks:
+      - aaroh-net
+
+volumes:
+  mongo_data:
+  pg_data:
+  redis_data:
+  backend_uploads:
+
+networks:
+  aaroh-net:
+    driver: bridge

@@ -1,0 +1,167 @@
+[
+  {
+    "source_term": "water",
+    "translated_term": "पानी",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "येर (Yer)",
+      "sat": "दाः (Daah)",
+      "hne": "पानी (Paani)",
+      "bhi": "पाणी (Paani)"
+    },
+    "phonetic_hint": "paa-nee",
+    "notes": "Essential life element in village ecosystems"
+  },
+  {
+    "source_term": "well",
+    "translated_term": "कुआँ",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "बावड़ी / कुइया",
+      "sat": "इँकुआँ",
+      "hne": "कुँवा",
+      "bhi": "कुओ"
+    },
+    "phonetic_hint": "koo-aan",
+    "notes": "Community drinking water source"
+  },
+  {
+    "source_term": "handpump",
+    "translated_term": "चापाकल",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "हैंडपंप",
+      "sat": "चापाकोल",
+      "hne": "चपाकल",
+      "bhi": "हैंडपंप"
+    },
+    "phonetic_hint": "chaa-paa-kal",
+    "notes": "Groundwater extraction pump"
+  },
+  {
+    "source_term": "rain",
+    "translated_term": "बारिश",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "पिर (Pir)",
+      "sat": "दाग (Daag)",
+      "hne": "बरसात (Barsaat)",
+      "bhi": "वरसाद"
+    },
+    "phonetic_hint": "baa-rish",
+    "notes": "Monsoon rainfall"
+  },
+  {
+    "source_term": "evaporation",
+    "translated_term": "वाष्पीकरण (भाप बनना)",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "science",
+    "dialects": {
+      "gon": "भाप बनके उड़ना",
+      "sat": "भाप लेका रकाब",
+      "hne": "भाप बनके उड़ना",
+      "bhi": "भाप बनवुं"
+    },
+    "phonetic_hint": "vash-pee-karan",
+    "notes": "Concept explained through drying clothes or heating water"
+  },
+  {
+    "source_term": "earthen pot",
+    "translated_term": "मिट्टी का घड़ा (मटका)",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "कुंजे / मटका",
+      "sat": "हासा टुकुच (Hasa Tukuch)",
+      "hne": "माटी के मटका",
+      "bhi": "माटी नो घड़ो"
+    },
+    "phonetic_hint": "mat-kaa",
+    "notes": "Traditional natural cooling pot"
+  },
+  {
+    "source_term": "check dam",
+    "translated_term": "चेक डैम (छोटा बाँध / बंधारा)",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "बंधान (Bandhan)",
+      "sat": "आड़ / बंधा",
+      "hne": "नरवा बंधान",
+      "bhi": "बंधारो"
+    },
+    "phonetic_hint": "ban-dhaa-raa",
+    "notes": "Soil moisture & rainwater harvesting structure"
+  },
+  {
+    "source_term": "plant",
+    "translated_term": "पौधा",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "मरा / झाड़ (Mara)",
+      "sat": "दारे (Dare)",
+      "hne": "बिरवा (Birwa)",
+      "bhi": "छोडवो"
+    },
+    "phonetic_hint": "pau-dhaa",
+    "notes": "Primary botanical terminology"
+  },
+  {
+    "source_term": "tree",
+    "translated_term": "पेड़ (वृक्ष)",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "evs",
+    "dialects": {
+      "gon": "मर्रा (Marra)",
+      "sat": "दारे (Dare)",
+      "hne": "रुखवा (Rukhwa)",
+      "bhi": "झाड़"
+    },
+    "phonetic_hint": "ped",
+    "notes": "Forest tree"
+  },
+  {
+    "source_term": "addition",
+    "translated_term": "जोड़ (मिलाना)",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "math",
+    "dialects": {
+      "gon": "जोड़ना",
+      "sat": "मेसा (Mesa)",
+      "hne": "जोड़ई / एकाठा करना",
+      "bhi": "भेगुं करवुं"
+    },
+    "phonetic_hint": "jod",
+    "notes": "Math operation with pebbles or sticks"
+  },
+  {
+    "source_term": "subtraction",
+    "translated_term": "घटाव (निकालना)",
+    "source_lang": "en",
+    "target_lang": "hi",
+    "domain": "math",
+    "dialects": {
+      "gon": "काटना / कम करना",
+      "sat": "ओड़ोक (Orok)",
+      "hne": "घटई / छांटना",
+      "bhi": "कापवुं"
+    },
+    "phonetic_hint": "gha-taav",
+    "notes": "Math operation"
+  }
+]

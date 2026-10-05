@@ -1,0 +1,80 @@
+[2026-09-30 22:03:36,314] aaroh_backend - INFO - postgres.py:53 - Using SQLite database for curriculum and learning data at: sqlite:///data\aaroh_backend.db
+[2026-09-30 22:03:36,329] aaroh_backend - INFO - postgres.py:66 - PostgreSQL schema initialized successfully.
+[2026-09-30 22:03:37,928] aaroh_backend - INFO - aaroh_ai_adapter.py:43 - Initializing AarohAIAdapter pointing to: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 22:03:38,187] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:03:38,192] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:03:44,635] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-30 22:03:46,719] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:03:46,724] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:03:50,792] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:03:50,799] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:03:50,800] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:03:50,807] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:03:56,870] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:03:56,871] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:03:56,877] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:04:02,958] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:04:02,960] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:04:02,964] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:04:09,025] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:04:13,082] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:04:13,089] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:04:13,092] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:04:13,098] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:04:15,113] aaroh_backend - INFO - aaroh_ai_adapter.py:98 - All 8 Aaroh-AI pipelines initialized successfully via adapter.
+[2026-09-30 22:04:15,527] aaroh_backend - INFO - main.py:35 - Starting AAROH Platform API v1.0.0 (development)...
+[2026-09-30 22:04:15,528] aaroh_backend - INFO - mongodb.py:19 - Connecting to MongoDB at mongodb://mayankraj170804_db_user:gFmN37Om10iybgEP@ac-dql9vpr-shard-00-00.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-01.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-02.yfy2axz.mongodb.net:27017/?ssl=true&replicaSet=atlas-139c07-shard-0&authSource=admin&appName=Cluster0...
+[2026-09-30 22:04:18,032] aaroh_backend - INFO - mongodb.py:30 - Connected to MongoDB database: aaroh_auth_db
+[2026-09-30 22:04:19,020] aaroh_backend - INFO - mongodb.py:74 - MongoDB identity indexes initialized successfully.
+[2026-09-30 22:04:19,020] aaroh_backend - INFO - main.py:37 - MongoDB identity database ready.
+[2026-09-30 22:04:19,020] aaroh_backend - INFO - main.py:38 - PostgreSQL learning & curriculum database ready.
+[2026-09-30 22:04:19,020] aaroh_backend - INFO - main.py:39 - Aaroh-AI integration ready at: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 22:14:44,733] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.62ms with 0 glossary terms.
+[2026-09-30 22:15:00,694] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.08ms with 0 glossary terms.
+[2026-09-30 22:15:04,586] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.11ms with 0 glossary terms.
+[2026-09-30 22:15:07,658] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.12ms with 0 glossary terms.
+[2026-09-30 22:15:12,573] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.1ms with 0 glossary terms.
+[2026-09-30 22:15:12,574] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.08ms with 0 glossary terms.
+[2026-09-30 22:15:24,350] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.23ms with 0 glossary terms.
+[2026-09-30 22:15:27,432] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.11ms with 0 glossary terms.
+[2026-09-30 22:15:28,138] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.13ms with 0 glossary terms.
+[2026-09-30 22:15:28,655] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.08ms with 0 glossary terms.
+[2026-09-30 22:15:32,415] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.1ms with 0 glossary terms.
+[2026-09-30 22:15:39,913] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.1ms with 0 glossary terms.
+[2026-09-30 22:24:08,287] AAROH - INFO - translation.py:72 - Translated (en->sat) in 0.03ms with 0 glossary terms.
+[2026-09-30 22:24:23,129] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-09-30 22:24:23,132] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-09-30 22:24:23,141] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-09-30 22:24:32,229] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\custom_sat_05b842fe.wav (1.5s)
+[2026-09-30 22:24:58,089] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-01' \u2192 sat/None
+[2026-09-30 22:24:58,171] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-01' (sat/None) in local store.
+[2026-09-30 22:24:58,171] AAROH - INFO - localization.py:91 - Localized lesson generated in 90.64ms for 'EVS-G3-WAT-01'
+[2026-09-30 22:24:58,171] AAROH - INFO - quiz_generator.py:69 - Quiz generated: 'EVS-G3-WAT-01' — 5 questions
+[2026-09-30 22:24:58,178] AAROH - INFO - quiz_assessment_pipeline.py:339 - Quiz 'ec9b71e8-173f-4f07-92dc-af5553b2314d' saved to database.
+[2026-09-30 22:25:18,741] AAROH - INFO - simplification_localization_pipeline.py:54 - ============================================================
+[2026-09-30 22:25:18,741] AAROH - INFO - simplification_localization_pipeline.py:55 - Phase 3 Pipeline: 'EVS-G3-WAT-01' \u2192 sat / mayurbhanj
+[2026-09-30 22:25:18,758] AAROH - INFO - simplification_localization_pipeline.py:56 - ============================================================
+[2026-09-30 22:25:18,769] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-01' \u2192 sat/mayurbhanj
+[2026-09-30 22:25:18,774] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-01' (sat/mayurbhanj) in local store.
+[2026-09-30 22:25:18,774] AAROH - INFO - localization.py:91 - Localized lesson generated in 16.12ms for 'EVS-G3-WAT-01'
+[2026-09-30 22:25:18,774] AAROH - INFO - simplification_localization_pipeline.py:66 - Phase 3 complete. Cached: False
+[2026-09-30 22:26:10,903] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.11ms with 0 glossary terms.
+[2026-09-30 22:26:15,511] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.12ms with 0 glossary terms.
+[2026-09-30 22:26:16,124] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.09ms with 0 glossary terms.
+[2026-09-30 22:26:19,402] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.18ms with 0 glossary terms.
+[2026-09-30 22:26:23,225] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.17ms with 0 glossary terms.
+[2026-09-30 22:26:24,444] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.11ms with 0 glossary terms.
+[2026-09-30 22:26:30,141] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.12ms with 0 glossary terms.
+[2026-09-30 22:26:33,959] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.12ms with 0 glossary terms.
+[2026-09-30 22:26:35,362] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_dfa2f050.wav (4.15s)
+[2026-09-30 22:26:42,327] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_53ce5b9d.wav (4.15s)
+[2026-09-30 22:26:46,517] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_e7b2fda3.wav (4.15s)
+[2026-09-30 22:26:50,285] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.11ms with 0 glossary terms.
+[2026-09-30 22:26:52,354] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_de75e787.wav (4.15s)
+[2026-09-30 22:26:53,996] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_320ce855.wav (4.15s)
+[2026-09-30 22:26:55,057] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_42b34c5d.wav (4.15s)
+[2026-09-30 22:27:11,523] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.08ms with 0 glossary terms.
+[2026-09-30 22:27:14,268] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_d8e45dfe.wav (4.15s)
+[2026-09-30 22:28:02,292] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_873421f7.wav (4.15s)
+[2026-09-30 22:28:21,035] AAROH - INFO - translation.py:72 - Translated (en->hi) in 0.08ms with 0 glossary terms.
+[2026-09-30 22:28:23,389] AAROH - INFO - voice_tts.py:92 - Local audio synthesized: data\audio\translation_playback_hi_4a63b261.wav (4.15s)

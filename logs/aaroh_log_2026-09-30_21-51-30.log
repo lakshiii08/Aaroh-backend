@@ -1,0 +1,24 @@
+[2026-09-30 21:51:30,563] aaroh_backend - INFO - postgres.py:53 - Using SQLite database for curriculum and learning data at: sqlite:///data\aaroh_backend.db
+[2026-09-30 21:51:30,578] aaroh_backend - INFO - postgres.py:66 - PostgreSQL schema initialized successfully.
+[2026-09-30 21:51:32,300] aaroh_backend - INFO - aaroh_ai_adapter.py:43 - Initializing AarohAIAdapter pointing to: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 21:51:32,570] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:51:32,575] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:51:39,127] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-30 21:51:41,162] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:51:41,167] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:51:45,224] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:51:45,234] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:51:45,235] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:51:45,243] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:51:51,311] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:51:51,312] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:51:51,320] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:51:57,420] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:51:57,421] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:51:57,426] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:52:03,503] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:52:07,557] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:52:07,564] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:52:07,569] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:52:07,575] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:52:09,598] aaroh_backend - INFO - aaroh_ai_adapter.py:98 - All 8 Aaroh-AI pipelines initialized successfully via adapter.

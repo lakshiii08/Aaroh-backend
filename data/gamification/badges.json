@@ -1,0 +1,38 @@
+[
+  {
+    "badge_id": "badge_jal_rakshak",
+    "badge_name": "Jal Rakshak (Water Protector)",
+    "title_local": "जल रक्षक (Jal Rakshak)",
+    "description": "Completed water cycle quest and helped village save clean water.",
+    "icon_symbol": "💧",
+    "tier": "Bronze",
+    "xp_bonus": 100
+  },
+  {
+    "badge_id": "badge_matka_master",
+    "badge_name": "Matka Master (Clay Pot Scientist)",
+    "title_local": "मटका वैज्ञानिक (Matka Vaigyanik)",
+    "description": "Understood evaporation through traditional clay pot cooling.",
+    "icon_symbol": "🏺",
+    "tier": "Silver",
+    "xp_bonus": 150
+  },
+  {
+    "badge_id": "badge_vriksh_mitra",
+    "badge_name": "Vriksh Mitra (Tree Friend)",
+    "title_local": "वृक्ष मित्र (Tree Friend)",
+    "description": "Observed dew condensation on forest neem leaves.",
+    "icon_symbol": "🌿",
+    "tier": "Bronze",
+    "xp_bonus": 100
+  },
+  {
+    "badge_id": "badge_gaon_khoji",
+    "badge_name": "Gaon Khoji (Village Explorer)",
+    "title_local": "गाँव खोजी (Village Explorer)",
+    "description": "Completed 5 daily observation nature quests in village.",
+    "icon_symbol": "🧭",
+    "tier": "Gold",
+    "xp_bonus": 300
+  }
+]

@@ -1,0 +1,33 @@
+[2026-09-30 21:59:38,003] aaroh_backend - INFO - postgres.py:53 - Using SQLite database for curriculum and learning data at: sqlite:///data\aaroh_backend.db
+[2026-09-30 21:59:38,019] aaroh_backend - INFO - postgres.py:66 - PostgreSQL schema initialized successfully.
+[2026-09-30 21:59:39,780] aaroh_backend - INFO - aaroh_ai_adapter.py:43 - Initializing AarohAIAdapter pointing to: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 21:59:40,059] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:59:40,064] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:59:46,569] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-30 21:59:48,662] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:59:48,668] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:59:52,727] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:59:52,735] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:59:52,737] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:59:52,744] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 21:59:58,821] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 21:59:58,822] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 21:59:58,829] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:00:04,895] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:00:04,896] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:00:04,901] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:00:10,977] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:00:15,019] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:00:15,025] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:00:15,030] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:00:15,035] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:00:17,052] aaroh_backend - INFO - aaroh_ai_adapter.py:98 - All 8 Aaroh-AI pipelines initialized successfully via adapter.
+[2026-09-30 22:00:17,471] aaroh_backend - INFO - main.py:35 - Starting AAROH Platform API v1.0.0 (development)...
+[2026-09-30 22:00:17,472] aaroh_backend - INFO - mongodb.py:19 - Connecting to MongoDB at mongodb://mayankraj170804_db_user:gFmN37Om10iybgEP@ac-dql9vpr-shard-00-00.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-01.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-02.yfy2axz.mongodb.net:27017/?ssl=true&replicaSet=atlas-139c07-shard-0&authSource=admin&appName=Cluster0...
+[2026-09-30 22:00:21,032] aaroh_backend - INFO - mongodb.py:30 - Connected to MongoDB database: aaroh_auth_db
+[2026-09-30 22:00:21,916] aaroh_backend - INFO - mongodb.py:74 - MongoDB identity indexes initialized successfully.
+[2026-09-30 22:00:21,916] aaroh_backend - INFO - main.py:37 - MongoDB identity database ready.
+[2026-09-30 22:00:21,916] aaroh_backend - INFO - main.py:38 - PostgreSQL learning & curriculum database ready.
+[2026-09-30 22:00:21,916] aaroh_backend - INFO - main.py:39 - Aaroh-AI integration ready at: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 22:00:22,024] aaroh_backend - INFO - mongodb.py:84 - MongoDB client disconnected.
+[2026-09-30 22:00:22,024] aaroh_backend - INFO - main.py:43 - Shutdown complete for AAROH Platform API.

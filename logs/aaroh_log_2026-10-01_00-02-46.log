@@ -1,0 +1,68 @@
+[2026-10-01 00:02:46,470] aaroh_backend - INFO - postgres.py:53 - Using SQLite database for curriculum and learning data at: sqlite:///data\aaroh_backend.db
+[2026-10-01 00:02:46,486] aaroh_backend - INFO - postgres.py:66 - PostgreSQL schema initialized successfully.
+[2026-10-01 00:02:48,213] aaroh_backend - INFO - aaroh_ai_adapter.py:43 - Initializing AarohAIAdapter pointing to: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-10-01 00:02:48,467] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:02:48,476] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:02:55,000] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-10-01 00:02:57,081] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:02:57,118] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:03:01,176] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-10-01 00:03:01,185] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-10-01 00:03:01,187] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:03:01,193] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:03:07,263] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-10-01 00:03:07,264] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:03:07,269] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:03:13,353] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-10-01 00:03:13,354] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:03:13,360] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:03:19,434] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-10-01 00:03:23,493] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:03:23,499] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:03:23,505] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-10-01 00:03:23,513] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-10-01 00:03:25,536] aaroh_backend - INFO - aaroh_ai_adapter.py:98 - All 8 Aaroh-AI pipelines initialized successfully via adapter.
+[2026-10-01 00:03:25,954] aaroh_backend - INFO - main.py:35 - Starting AAROH Platform API v1.0.0 (development)...
+[2026-10-01 00:03:25,954] aaroh_backend - INFO - mongodb.py:19 - Connecting to MongoDB at mongodb://mayankraj170804_db_user:gFmN37Om10iybgEP@ac-dql9vpr-shard-00-00.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-01.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-02.yfy2axz.mongodb.net:27017/?ssl=true&replicaSet=atlas-139c07-shard-0&authSource=admin&appName=Cluster0...
+[2026-10-01 00:03:27,410] aaroh_backend - INFO - mongodb.py:30 - Connected to MongoDB database: aaroh_auth_db
+[2026-10-01 00:03:27,973] aaroh_backend - INFO - mongodb.py:74 - MongoDB identity indexes initialized successfully.
+[2026-10-01 00:03:27,973] aaroh_backend - INFO - main.py:37 - MongoDB identity database ready.
+[2026-10-01 00:03:27,973] aaroh_backend - INFO - main.py:38 - PostgreSQL learning & curriculum database ready.
+[2026-10-01 00:03:27,973] aaroh_backend - INFO - main.py:39 - Aaroh-AI integration ready at: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-10-01 00:04:25,642] AAROH - INFO - translation.py:72 - Translated (en->hi) in 857.92ms with 1 glossary terms.
+[2026-10-01 00:05:21,759] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:05:21,762] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:05:21,762] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:05:21,770] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:05:21,778] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:05:21,794] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:05:27,699] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_24f03911.mp3 (1.5s)
+[2026-10-01 00:05:58,724] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_83ba1b06.mp3 (1.5s)
+[2026-10-01 00:06:28,819] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:06:28,820] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:06:28,821] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:06:28,821] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:06:28,831] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:06:28,854] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:12:57,142] AAROH - INFO - translation.py:72 - Translated (en->hi) in 837.83ms with 1 glossary terms.
+[2026-10-01 00:13:12,620] AAROH - INFO - translation.py:72 - Translated (en->hi) in 313.73ms with 1 glossary terms.
+[2026-10-01 00:13:36,265] AAROH - INFO - translation.py:72 - Translated (en->sat) in 948.68ms with 0 glossary terms.
+[2026-10-01 00:13:42,998] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_677b3f9f.mp3 (2.77s)
+[2026-10-01 00:18:29,027] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:18:29,027] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:18:29,029] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:18:29,033] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:18:29,040] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:18:29,058] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:18:33,249] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:18:33,250] AAROH - INFO - visual_storytelling.py:70 - Generated 4 visual flashcards for 'EVS-G3-WAT-01'
+[2026-10-01 00:18:33,251] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:18:33,252] AAROH - INFO - visual_storytelling.py:120 - Printable flashcard HTML deck saved: data\flashcards\deck_evs-g3-wat-01_gon.html
+[2026-10-01 00:18:33,259] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:18:33,269] AAROH - INFO - gamification_pipeline.py:234 - 4 flashcards saved to DB.
+[2026-10-01 00:23:19,220] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_93ed54fa.mp3 (2.77s)
+[2026-10-01 00:24:25,580] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_f6c3074c.mp3 (2.77s)
+[2026-10-01 00:24:45,851] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_33106d15.mp3 (2.31s)
+[2026-10-01 00:40:14,940] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_f91b67c7.mp3 (1.5s)
+[2026-10-01 00:40:34,811] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_7461a83a.mp3 (1.5s)
+[2026-10-01 00:40:40,133] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\custom_sat_e687b6a6.mp3 (1.5s)

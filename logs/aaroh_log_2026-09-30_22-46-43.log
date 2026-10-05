@@ -1,0 +1,147 @@
+[2026-09-30 22:46:43,805] aaroh_backend - INFO - postgres.py:53 - Using SQLite database for curriculum and learning data at: sqlite:///data\aaroh_backend.db
+[2026-09-30 22:46:43,819] aaroh_backend - INFO - postgres.py:66 - PostgreSQL schema initialized successfully.
+[2026-09-30 22:46:45,532] aaroh_backend - INFO - aaroh_ai_adapter.py:43 - Initializing AarohAIAdapter pointing to: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 22:46:45,785] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:46:45,793] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:46:52,282] AAROH - INFO - glossary_db.py:57 - Loaded 12 glossary terms into local memory cache.
+[2026-09-30 22:46:54,369] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:46:54,376] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:46:58,439] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:46:58,445] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:46:58,446] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:46:58,451] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:47:04,522] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:47:04,523] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:47:04,528] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:47:10,617] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:47:10,619] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:47:10,627] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:47:16,689] AAROH - INFO - content_cache.py:31 - Loaded 10 entries from local content cache.
+[2026-09-30 22:47:20,735] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:47:20,742] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:47:20,746] AAROH - INFO - session.py:47 - Using SQLite database at sqlite:///data\aaroh_local.db
+[2026-09-30 22:47:20,751] AAROH - INFO - session.py:60 - Database schema initialized successfully.
+[2026-09-30 22:47:22,773] aaroh_backend - INFO - aaroh_ai_adapter.py:98 - All 8 Aaroh-AI pipelines initialized successfully via adapter.
+[2026-09-30 22:47:23,283] aaroh_backend - INFO - main.py:35 - Starting AAROH Platform API v1.0.0 (development)...
+[2026-09-30 22:47:23,284] aaroh_backend - INFO - mongodb.py:19 - Connecting to MongoDB at mongodb://mayankraj170804_db_user:gFmN37Om10iybgEP@ac-dql9vpr-shard-00-00.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-01.yfy2axz.mongodb.net:27017,ac-dql9vpr-shard-00-02.yfy2axz.mongodb.net:27017/?ssl=true&replicaSet=atlas-139c07-shard-0&authSource=admin&appName=Cluster0...
+[2026-09-30 22:47:24,758] aaroh_backend - INFO - mongodb.py:30 - Connected to MongoDB database: aaroh_auth_db
+[2026-09-30 22:47:25,884] aaroh_backend - INFO - mongodb.py:74 - MongoDB identity indexes initialized successfully.
+[2026-09-30 22:47:25,885] aaroh_backend - INFO - main.py:37 - MongoDB identity database ready.
+[2026-09-30 22:47:25,885] aaroh_backend - INFO - main.py:38 - PostgreSQL learning & curriculum database ready.
+[2026-09-30 22:47:25,885] aaroh_backend - INFO - main.py:39 - Aaroh-AI integration ready at: C:\Users\Mayank\OneDrive\Desktop\Aaroh-AI
+[2026-09-30 22:47:37,364] AAROH - INFO - translation.py:72 - Translated (en->sat) in 2798.83ms with 0 glossary terms.
+[2026-09-30 22:47:38,752] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1381.78ms with 0 glossary terms.
+[2026-09-30 22:47:40,739] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1981.09ms with 0 glossary terms.
+[2026-09-30 22:47:56,156] AAROH - INFO - translation.py:72 - Translated (en->sat) in 783.61ms with 0 glossary terms.
+[2026-09-30 22:47:59,607] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_81466bde.mp3 (1.85s)
+[2026-09-30 22:48:10,551] AAROH - INFO - translation.py:72 - Translated (en->sat) in 954.37ms with 0 glossary terms.
+[2026-09-30 22:48:14,655] AAROH - INFO - translation.py:72 - Translated (en->sat) in 2556.97ms with 0 glossary terms.
+[2026-09-30 22:48:19,651] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_10cfa0cb.mp3 (1.5s)
+[2026-09-30 22:48:24,154] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_e7c17f1d.mp3 (1.5s)
+[2026-09-30 22:48:33,310] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 2299.9ms with 0 glossary terms.
+[2026-09-30 22:48:40,982] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1813.39ms with 0 glossary terms.
+[2026-09-30 22:48:45,995] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 2593.55ms with 0 glossary terms.
+[2026-09-30 22:48:48,282] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_d5b6a9f7.mp3 (1.5s)
+[2026-09-30 22:48:59,618] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1869.78ms with 0 glossary terms.
+[2026-09-30 22:49:06,623] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1717.05ms with 0 glossary terms.
+[2026-09-30 22:49:08,478] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1090.92ms with 0 glossary terms.
+[2026-09-30 22:49:11,674] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_b7fc770a.mp3 (2.77s)
+[2026-09-30 22:49:24,143] AAROH - INFO - translation.py:72 - Translated (en->hi) in 804.59ms with 0 glossary terms.
+[2026-09-30 22:49:26,409] AAROH - INFO - translation.py:72 - Translated (en->hi) in 406.71ms with 0 glossary terms.
+[2026-09-30 22:49:29,160] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_48e66cb6.mp3 (3.69s)
+[2026-09-30 22:49:38,627] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1623.63ms with 0 glossary terms.
+[2026-09-30 22:49:41,680] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_8e320ea4.mp3 (2.77s)
+[2026-09-30 22:49:55,390] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1350.75ms with 0 glossary terms.
+[2026-09-30 22:50:01,686] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 877.37ms with 0 glossary terms.
+[2026-09-30 22:50:04,611] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_e97da68b.mp3 (1.85s)
+[2026-09-30 22:50:22,780] AAROH - INFO - translation.py:72 - Translated (hi->hi) in 273.74ms with 0 glossary terms.
+[2026-09-30 22:50:30,645] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1116.19ms with 0 glossary terms.
+[2026-09-30 22:50:35,330] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_1213faf9.mp3 (1.5s)
+[2026-09-30 22:50:38,916] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_95eb7e52.mp3 (1.5s)
+[2026-09-30 22:50:47,242] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1066.83ms with 0 glossary terms.
+[2026-09-30 22:50:49,606] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_80deb0ad.mp3 (1.5s)
+[2026-09-30 22:50:52,733] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1834.04ms with 0 glossary terms.
+[2026-09-30 22:50:55,341] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_7fe8e5dc.mp3 (1.5s)
+[2026-09-30 22:50:58,246] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_2bff00cc.mp3 (1.5s)
+[2026-09-30 22:51:01,850] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_a36264ca.mp3 (1.5s)
+[2026-09-30 22:51:04,509] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_2d3db038.mp3 (1.5s)
+[2026-09-30 22:51:07,649] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_0f112252.mp3 (1.5s)
+[2026-09-30 22:51:18,872] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1728.22ms with 0 glossary terms.
+[2026-09-30 22:51:24,334] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1172.4ms with 0 glossary terms.
+[2026-09-30 22:51:27,241] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1292.0ms with 0 glossary terms.
+[2026-09-30 22:51:29,904] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_09d928c3.mp3 (1.5s)
+[2026-09-30 22:51:33,595] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_97c7052c.mp3 (1.5s)
+[2026-09-30 22:52:15,286] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1043.73ms with 0 glossary terms.
+[2026-09-30 22:52:19,675] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_783de260.mp3 (1.5s)
+[2026-09-30 22:52:34,487] AAROH - INFO - translation.py:72 - Translated (en->sat) in 865.82ms with 0 glossary terms.
+[2026-09-30 22:52:36,798] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_af1d991b.mp3 (1.85s)
+[2026-09-30 22:59:01,897] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1671.3ms with 0 glossary terms.
+[2026-09-30 22:59:26,782] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1439.24ms with 0 glossary terms.
+[2026-09-30 23:05:15,669] AAROH - INFO - translation.py:72 - Translated (en->sat) in 864.6ms with 0 glossary terms.
+[2026-09-30 23:05:16,191] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1652.3ms with 0 glossary terms.
+[2026-09-30 23:05:17,720] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_877e0982.mp3 (1.5s)
+[2026-09-30 23:05:25,596] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_631be034.mp3 (1.5s)
+[2026-09-30 23:05:31,760] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_b4b2849e.mp3 (1.5s)
+[2026-09-30 23:05:43,428] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1556.43ms with 0 glossary terms.
+[2026-09-30 23:05:48,738] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_3106b628.mp3 (1.5s)
+[2026-09-30 23:05:56,212] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_cead03b0.mp3 (1.5s)
+[2026-09-30 23:08:42,291] AAROH - INFO - content_ingestion_pipeline.py:36 - ============================================================
+[2026-09-30 23:08:42,291] AAROH - INFO - content_ingestion_pipeline.py:37 - Starting Content Ingestion Pipeline for: data\uploads\AAROH_Sample_Learning_Material_Science_Class4.pdf
+[2026-09-30 23:08:42,291] AAROH - INFO - content_ingestion_pipeline.py:38 - ============================================================
+[2026-09-30 23:08:42,316] AAROH - INFO - data_ingestion.py:85 - Parsing document: AAROH_Sample_Learning_Material_Science_Class4.pdf (Size: 29212 bytes, Extension: .pdf)
+[2026-09-30 23:08:42,359] AAROH - INFO - data_ingestion.py:140 - Successfully parsed AAROH_Sample_Learning_Material_Science_Class4.pdf: 2 pages, 2308 characters.
+[2026-09-30 23:08:42,359] AAROH - INFO - data_ingestion.py:207 - Generated 2 educational chunks for document 'AAROH_Sample_Learning_Material_Science_Class4.pdf'
+[2026-09-30 23:08:42,359] AAROH - INFO - content_transformation.py:42 - Extracting concepts for document: AAROH_Sample_Learning_Material_Science_Class4.pdf...
+[2026-09-30 23:08:42,359] AAROH - INFO - content_transformation.py:86 - Extracted 3 concepts from 'AAROH_Sample_Learning_Material_Science_Class4.pdf'
+[2026-09-30 23:08:42,360] AAROH - INFO - rag_pipeline.py:30 - Indexing document 'AAROH_Sample_Learning_Material_Science_Class4.pdf' into database/vector store...
+[2026-09-30 23:08:42,394] AAROH - INFO - rag_pipeline.py:116 - Successfully indexed 2 chunks and 3 concepts.
+[2026-09-30 23:08:42,398] AAROH - INFO - content_ingestion_pipeline.py:64 - ============================================================
+[2026-09-30 23:08:42,398] AAROH - INFO - content_ingestion_pipeline.py:65 - Pipeline Completed Successfully: SUCCESS
+[2026-09-30 23:08:42,399] AAROH - INFO - content_ingestion_pipeline.py:66 - Document ID: 328f4a28-9569-49c4-9b76-28795d958a0a | Chunks: 2 | Concepts: 3
+[2026-09-30 23:08:42,399] AAROH - INFO - content_ingestion_pipeline.py:67 - ============================================================
+[2026-09-30 23:08:42,510] AAROH - INFO - simplification_localization_pipeline.py:54 - ============================================================
+[2026-09-30 23:08:42,510] AAROH - INFO - simplification_localization_pipeline.py:55 - Phase 3 Pipeline: 'EVS-G3-WAT-01' \u2192 sat / Standard
+[2026-09-30 23:08:42,517] AAROH - INFO - simplification_localization_pipeline.py:56 - ============================================================
+[2026-09-30 23:08:42,534] AAROH - INFO - localization.py:78 - Generating localized lesson: 'EVS-G3-WAT-01' \u2192 sat/None
+[2026-09-30 23:08:42,540] AAROH - INFO - content_cache.py:71 - Cached localized lesson for concept 'EVS-G3-WAT-01' (sat/None) in local store.
+[2026-09-30 23:08:42,540] AAROH - INFO - localization.py:91 - Localized lesson generated in 23.79ms for 'EVS-G3-WAT-01'
+[2026-09-30 23:08:42,541] AAROH - INFO - simplification_localization_pipeline.py:66 - Phase 3 complete. Cached: False
+[2026-09-30 23:08:46,792] AAROH - INFO - translation.py:72 - Translated (en->sat) in 4251.55ms with 0 glossary terms.
+[2026-09-30 23:08:50,634] AAROH - INFO - translation.py:72 - Translated (en->sat) in 3841.19ms with 0 glossary terms.
+[2026-09-30 23:08:54,723] AAROH - INFO - translation.py:72 - Translated (en->sat) in 4088.75ms with 0 glossary terms.
+[2026-09-30 23:08:54,736] aaroh_backend - INFO - assignment_service.py:204 - Generated real assignment 'asgn_bfb14d7c2b2d' with 5 questions based on Aaroh-AI.
+[2026-09-30 23:12:56,150] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1809.4ms with 0 glossary terms.
+[2026-09-30 23:12:59,330] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_604daea0.mp3 (1.5s)
+[2026-09-30 23:13:12,536] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1433.2ms with 0 glossary terms.
+[2026-09-30 23:13:14,534] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_edfd4f10.mp3 (1.5s)
+[2026-09-30 23:13:34,108] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1427.32ms with 0 glossary terms.
+[2026-09-30 23:13:39,646] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1094.05ms with 0 glossary terms.
+[2026-09-30 23:13:42,783] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1902.1ms with 0 glossary terms.
+[2026-09-30 23:13:46,435] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_1783ff8a.mp3 (1.5s)
+[2026-09-30 23:13:58,522] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_92a5865b.mp3 (1.5s)
+[2026-09-30 23:14:13,973] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_f0fe57f2.mp3 (1.5s)
+[2026-09-30 23:14:17,255] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_08185de9.mp3 (1.5s)
+[2026-09-30 23:14:24,153] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1901.15ms with 0 glossary terms.
+[2026-09-30 23:14:26,216] AAROH - INFO - translation.py:72 - Translated (en->sat) in 608.26ms with 0 glossary terms.
+[2026-09-30 23:14:29,452] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_9b81bc8d.mp3 (1.5s)
+[2026-09-30 23:14:45,468] AAROH - INFO - translation.py:72 - Translated (en->sat) in 636.86ms with 0 glossary terms.
+[2026-09-30 23:14:47,983] AAROH - INFO - translation.py:72 - Translated (en->sat) in 377.67ms with 0 glossary terms.
+[2026-09-30 23:14:50,329] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_d2b9f49f.mp3 (1.5s)
+[2026-09-30 23:15:44,393] AAROH - INFO - translation.py:72 - Translated (en->sat) in 535.82ms with 0 glossary terms.
+[2026-09-30 23:15:49,719] AAROH - INFO - translation.py:72 - Translated (en->sat) in 352.09ms with 0 glossary terms.
+[2026-09-30 23:15:52,158] AAROH - INFO - translation.py:72 - Translated (en->sat) in 322.37ms with 0 glossary terms.
+[2026-09-30 23:15:55,083] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_7832f6ff.mp3 (1.5s)
+[2026-09-30 23:16:19,646] AAROH - INFO - translation.py:72 - Translated (en->sat) in 276.19ms with 0 glossary terms.
+[2026-09-30 23:16:23,002] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 258.39ms with 0 glossary terms.
+[2026-09-30 23:16:28,073] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1676.91ms with 0 glossary terms.
+[2026-09-30 23:16:30,991] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_93240ca3.mp3 (1.5s)
+[2026-09-30 23:16:35,495] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_d3f75a5a.mp3 (1.5s)
+[2026-09-30 23:16:37,613] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_0875ac17.mp3 (1.5s)
+[2026-09-30 23:16:44,793] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_59702a54.mp3 (1.5s)
+[2026-09-30 23:16:48,910] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_07f8ab4c.mp3 (1.5s)
+[2026-09-30 23:17:06,776] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 978.75ms with 0 glossary terms.
+[2026-09-30 23:17:08,740] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1031.48ms with 0 glossary terms.
+[2026-09-30 23:17:10,856] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_a9a0b22c.mp3 (1.5s)
+[2026-09-30 23:17:32,733] AAROH - INFO - translation.py:72 - Translated (en->sat) in 1516.05ms with 0 glossary terms.
+[2026-09-30 23:19:13,882] AAROH - INFO - translation.py:72 - Translated (hi->sat) in 1674.35ms with 0 glossary terms.
+[2026-09-30 23:19:16,825] AAROH - INFO - voice_tts.py:96 - Real human speech synthesized via gTTS: data\audio\translation_playback_hi_54874453.mp3 (1.5s)
