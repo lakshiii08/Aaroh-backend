@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    ca-certificates \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY Aaroh-backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --retries 10 --default-timeout 120 -r /app/requirements.txt
+
+COPY Aaroh-backend/ /app/Aaroh-backend/
+COPY Aaroh-AI/Aaroh-AI/ /app/Aaroh-AI/
+
+RUN test -d /app/Aaroh-AI/src/aaroh
+
+WORKDIR /app/Aaroh-backend
+
+ENV PYTHONPATH=/app/Aaroh-backend:/app/Aaroh-AI:/app/Aaroh-AI/src
+ENV AAROH_AI_PATH=/app/Aaroh-AI
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

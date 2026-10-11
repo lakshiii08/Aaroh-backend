@@ -261,5 +261,15 @@ To launch the full dual-database ecosystem with PostgreSQL + pgvector and MongoD
 ```bash
 docker compose up -d --build
 ```
+
+For local monorepo builds, run the command from the repository root. The root
+`docker-compose.yml` uses `Aaroh-backend/Dockerfile.local`, which copies the
+checked-out `Aaroh-AI/Aaroh-AI` source into the image and does not clone or
+download Aaroh-AI during the build.
+
+For backend-only remote deploys where the sibling `Aaroh-AI` directory is not
+available, use `Aaroh-backend/Dockerfile`. That file downloads the configured
+GitHub tarball via `AAROH_AI_TARBALL_URL`; if the repo is private, provide
+`AAROH_AI_GITHUB_TOKEN` as a Docker build arg with read access.
 #   A a r o h - b a c k e n d  
  

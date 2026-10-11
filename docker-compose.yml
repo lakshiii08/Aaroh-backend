@@ -49,8 +49,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        AAROH_AI_REPO_URL: ${AAROH_AI_REPO_URL:-https://github.com/Pahuja07/Aaroh-AI.git}
-        AAROH_AI_REF: ${AAROH_AI_REF:-main}
+        AAROH_AI_TARBALL_URL: ${AAROH_AI_TARBALL_URL:-https://api.github.com/repos/Pahuja07/Aaroh-AI/tarball/main}
+        AAROH_AI_GITHUB_TOKEN: ${AAROH_AI_GITHUB_TOKEN:-}
     container_name: aaroh-backend
     restart: always
     depends_on:
